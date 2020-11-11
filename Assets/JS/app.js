@@ -170,12 +170,19 @@ var dayNames = [
 	"FRIDAY",
 	"SATURDAY",
 ];
-var hrs, mins, days, month, year, day;
+var hrs, mins, ampm, days, month, year, day;
 
 setInterval(function () {
 	hrs = date.getHours();
 	mins = date.getMinutes();
-	$("#timeField").text(`${hrs}:${mins}`);
+	ampm = hrs >= 12 ? "PM" : "AM";
+	hrs =
+		hrs > 12
+			? String(hrs - 12).padStart(2, "0")
+			: hrs < 1
+			? "12"
+			: String(hrs).padStart(2, "0");
+	$("#timeField").text(`${hrs}:${mins} ${ampm}`);
 
 	days = date.getDate();
 	month = date.getMonth();
